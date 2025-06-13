@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PROJECT_TITLE}} - Gustavo Ángel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="project-styles.css">
+</head>
+<body>
+    <!-- Header reutilizable -->
+    <header id="header" class="project-header">
+        <nav class="container">
+            <a href="../index.html" class="logo">← Gustavo Ángel</a>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#sobre-mi">Sobre Mí</a></li>
+                <li><a href="../index.html#habilidades">Habilidades</a></li>
+                <li><a href="../index.html#proyectos">Proyectos</a></li>
+                <li><a href="../index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section del Proyecto -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-hero-content">
+                <div class="project-breadcrumb">
+                    <a href="../index.html">Inicio</a> / <a href="../index.html#proyectos">Proyectos</a> / <span>{{PROJECT_NAME}}</span>
+                </div>
+                <h1 class="project-title">{{PROJECT_TITLE}}</h1>
+                <p class="project-subtitle">{{PROJECT_SUBTITLE}}</p>
+                <div class="project-meta">
+                    <div class="project-tech-badges">
+                        {{TECH_BADGES}}
+                    </div>
+                    <div class="project-links">
+                        <a href="{{DEMO_LINK}}" class="btn-primary" target="_blank">Ver Imágenes</a>
+                        <a href="{{GITHUB_LINK}}" class="btn-secondary" target="_blank">Ver GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-hero-image">
+                <img src="{{PROJECT_IMAGE}}" alt="{{PROJECT_TITLE}}" class="project-screenshot">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido Principal del Proyecto -->
+    <main class="project-main">
+        <div class="container">
+            <div class="project-content-grid">
+                <!-- Sidebar con información del proyecto -->
+                <aside class="project-sidebar">
+                    <div class="project-info-card">
+                        <h3>Información del Proyecto</h3>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <strong>Tipo:</strong>
+                                <span>{{PROJECT_TYPE}}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Duración:</strong>
+                                <span>{{PROJECT_DURATION}}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Estado:</strong>
+                                <span class="status {{PROJECT_STATUS_CLASS}}">{{PROJECT_STATUS}}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Equipo:</strong>
+                                <span>{{PROJECT_TEAM}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-tech-card">
+                        <h3>Tecnologías Utilizadas</h3>
+                        <div class="tech-list">
+                            {{TECH_LIST}}
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Contenido principal -->
+                <article class="project-article">
+                    <section class="project-section">
+                        <h2>Descripción del Proyecto</h2>
+                        <p>{{PROJECT_DESCRIPTION}}</p>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>Objetivos</h2>
+                        <ul class="project-objectives">
+                            {{PROJECT_OBJECTIVES}}
+                        </ul>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>Características Principales</h2>
+                        <div class="features-grid">
+                            {{PROJECT_FEATURES}}
+                        </div>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>Proceso de Desarrollo</h2>
+                        <div class="development-timeline">
+                            {{DEVELOPMENT_PROCESS}}
+                        </div>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>Capturas de Pantalla</h2>
+                        <div class="screenshot-gallery">
+                            {{SCREENSHOTS}}
+                        </div>
+                    </section>
+
+                    <section class="project-section">
+                        <h2>Desafíos y Aprendizajes</h2>
+                        <div class="challenges-learnings">
+                            <div class="challenge-card">
+                                <h4>🚧 Desafíos Enfrentados</h4>
+                                <ul>
+                                    {{CHALLENGES}}
+                                </ul>
+                            </div>
+                            <div class="learning-card">
+                                <h4>📚 Aprendizajes Obtenidos</h4>
+                                <ul>
+                                    {{LEARNINGS}}
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sección de navegación a otros proyectos -->
+    <section class="project-navigation">
+        <div class="container">
+            <h2>Otros Proyectos</h2>
+            <div class="other-projects-grid">
+                {{OTHER_PROJECTS}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer reutilizable -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Gustavo Ángel Cruz Méndez. Desarrollador en formación con grandes aspiraciones.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Script específico para animaciones de proyecto
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animaciones para elementos de la página
+            const cards = document.querySelectorAll('.feature-card, .tech-item, .timeline-item');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('fade-in');
+            });
+        });
+    </script>
+</body>
+</html>
