@@ -469,12 +469,13 @@
     font-size: 1.05rem;
 }
 
-/* Galería de Screenshots */
+/* Galería de Screenshots - ACTUALIZADO para imágenes verticales */
 .screenshot-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2.5rem;
     margin-top: 2rem;
+    justify-items: center;
 }
 
 .screenshot-item {
@@ -484,6 +485,8 @@
     transition: all 0.3s ease;
     background: var(--background-card);
     border: 1px solid var(--border-light);
+    max-width: 100%;
+    width: 100%;
 }
 
 .screenshot-item:hover {
@@ -494,7 +497,18 @@
 .screenshot-item img {
     width: 100%;
     height: auto;
+    max-height: 600px; /* Limita la altura máxima */
+    object-fit: contain; /* Mantiene la proporción sin recortar */
     display: block;
+    margin: 0 auto;
+    background: var(--background-secondary); /* Fondo para áreas vacías */
+}
+
+/* Estilos específicos para imágenes móviles/verticales */
+.screenshot-item img[src*="Pantalla"] {
+    max-height: 500px; /* Altura específica para screenshots móviles */
+    max-width: 280px; /* Ancho máximo para móviles */
+    margin: 0 auto;
 }
 
 .screenshot-caption {
@@ -506,6 +520,72 @@
     margin: 0;
     background: var(--background-secondary);
     border-top: 3px solid var(--primary-color);
+}
+
+/* Imagen del proyecto en Hero - ACTUALIZADO */
+.project-hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.project-screenshot {
+    width: 100%;
+    max-width: 350px; /* Reducido para móviles */
+    max-height: 600px; /* Altura máxima */
+    object-fit: contain; /* Mantiene proporción */
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-xl);
+    transition: transform 0.3s ease;
+    margin: 1rem;
+    background: var(--background-secondary);
+}
+
+.project-screenshot:hover {
+    transform: scale(1.03);
+}
+
+/* Responsive para imágenes verticales */
+@media (max-width: 768px) {
+    .screenshot-gallery {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .screenshot-item img {
+        max-height: 450px;
+    }
+    
+    .screenshot-item img[src*="Pantalla"] {
+        max-height: 400px;
+        max-width: 240px;
+    }
+    
+    .project-screenshot {
+        max-width: 280px;
+        max-height: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    .screenshot-item img {
+        max-height: 400px;
+    }
+    
+    .screenshot-item img[src*="Pantalla"] {
+        max-height: 350px;
+        max-width: 200px;
+    }
+    
+    .project-screenshot {
+        max-width: 240px;
+        max-height: 450px;
+    }
+    
+    .project-hero-image {
+        padding: 1rem 0;
+    }
 }
 
 /* Desafíos y Aprendizajes */
@@ -1846,4 +1926,216 @@ a:focus,
     .mobile-menu-btn span {
         background: var(--text-primary);
     }
+}
+/* Lightbox para imágenes - Agregar al final de project-styles.css */
+
+/* Lightbox Overlay */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.lightbox.active {
+    display: flex;
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contenedor de imagen en lightbox */
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: lightboxZoom 0.3s ease;
+}
+
+@keyframes lightboxZoom {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Imagen en lightbox */
+.lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    background: var(--background-card);
+}
+
+/* Botón de cerrar - SIN TRANSICIONES PROBLEMÁTICAS */
+.lightbox-close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    animation: fadeInButton 0.3s ease 0.2s forwards;
+}
+
+@keyframes fadeInButton {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.lightbox-close:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
+
+/* Caption del lightbox - CON ANIMACIÓN RETRASADA */
+.lightbox-caption {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    border-radius: var(--border-radius-lg);
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeInCaption 0.3s ease 0.2s forwards;
+}
+
+@keyframes fadeInCaption {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cursor pointer para imágenes clickeables */
+.screenshot-item img {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.screenshot-item img:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+/* Responsive para lightbox - SIMPLIFICADO */
+@media (max-width: 768px) {
+    .lightbox-content {
+        max-width: 95%;
+        max-height: 90%;
+    }
+    
+    .lightbox-close {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    .lightbox-caption {
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        font-size: 0.85rem;
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .lightbox-content {
+        max-width: 98%;
+        max-height: 85%;
+    }
+    
+    .lightbox-close {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
+    }
+    
+    .lightbox-caption {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Para pantallas muy grandes */
+@media (min-width: 1200px) {
+    .lightbox-close {
+        top: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    
+    .lightbox-caption {
+        bottom: 30px;
+        font-size: 1rem;
+        padding: 1.25rem;
+    }
+}
+
+/* Ajustes para tema oscuro */
+[data-theme="dark"] .lightbox-close {
+    background: rgba(30, 41, 59, 0.9);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .lightbox-close:hover {
+    background: var(--primary-color);
+    color: white;
 }

@@ -10,106 +10,138 @@ const template = fs.readFileSync(templatePath, 'utf8');
 
 // Configuración de cada proyecto
 const projects = {
-    'Peliculas': {
-        PROJECT_NAME: 'Sistema de Películas',
-        PROJECT_TITLE: 'Sistema de Gestión de Películas',
-        PROJECT_SUBTITLE: 'Plataforma web para explorar, buscar y gestionar información de películas con interfaz moderna y funcional',
-        PROJECT_IMAGE: '../assets/screenshots/peliculas-hero.jpg',
-        PROJECT_TYPE: 'Proyecto Académico',
-        PROJECT_DURATION: '3 semanas',
+    'SuperHero': {
+        PROJECT_NAME: 'SuperHero App',
+        PROJECT_TITLE: 'SuperHero App - Aplicación Móvil Android',
+        PROJECT_SUBTITLE: 'Aplicación móvil nativa para Android que permite explorar el universo de superhéroes con información detallada, características y poderes a través de una API especializada',
+        PROJECT_IMAGE: '../assets/img/superhero/Pantalla-Inicio.png',
+        PROJECT_TYPE: 'Proyecto Académico - Aplicaciones Móviles Multiplataforma',
+        PROJECT_DURATION: '4 semanas',
         PROJECT_STATUS: 'Completado',
         PROJECT_STATUS_CLASS: 'completed',
         PROJECT_TEAM: 'Individual',
         DEMO_LINK: '#screenshots',
         GITHUB_LINK: '#',
         TECH_BADGES: `
-            <span class="tech-badge">HTML5</span>
-            <span class="tech-badge">CSS3</span>
-            <span class="tech-badge">JavaScript</span>
+            <span class="tech-badge">Android Studio</span>
+            <span class="tech-badge">Kotlin</span>
             <span class="tech-badge">API REST</span>
-            <span class="tech-badge">Local Storage</span>`,
+            <span class="tech-badge">Android</span>
+            <span class="tech-badge">JSON</span>`,
         TECH_LIST: `
             <div class="tech-item">
-                <div class="tech-icon" style="background: #e34f26;">🌐</div>
-                <span>HTML5</span>
+                <div class="tech-icon" style="background: #3ddc84;">🤖</div>
+                <span>Android Studio</span>
             </div>
             <div class="tech-item">
-                <div class="tech-icon" style="background: #1572b6;">🎨</div>
-                <span>CSS3</span>
+                <div class="tech-icon" style="background: #7f52ff;">📱</div>
+                <span>Kotlin</span>
             </div>
             <div class="tech-item">
-                <div class="tech-icon" style="background: #f7df1e;">⚡</div>
-                <span>JavaScript ES6</span>
+                <div class="tech-icon" style="background: #ff6b6b;">📡</div>
+                <span>SuperHero API</span>
             </div>
             <div class="tech-item">
-                <div class="tech-icon" style="background: #61dafb;">📡</div>
-                <span>API REST</span>
+                <div class="tech-icon" style="background: #a4c639;">🛠️</div>
+                <span>Android SDK</span>
             </div>
             <div class="tech-item">
-                <div class="tech-icon" style="background: #ff6b6b;">💾</div>
-                <span>Local Storage</span>
+                <div class="tech-icon" style="background: #f7df1e;">📄</div>
+                <span>JSON Parsing</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon" style="background: #2196f3;">🔗</div>
+                <span>HTTP Requests</span>
             </div>`,
-        PROJECT_DESCRIPTION: 'Sistema web desarrollado como parte de la materia de Aplicaciones Web, que permite a los usuarios explorar un catálogo de películas, buscar títulos específicos, ver detalles completos y gestionar listas personalizadas de favoritos. La aplicación consume datos de una API externa para mostrar información actualizada sobre películas.',
+        PROJECT_DESCRIPTION: 'Aplicación móvil nativa para Android desarrollada en Android Studio como parte de la materia de Aplicaciones Móviles Multiplataforma. La app está programada completamente en Kotlin y consume una API especializada de superhéroes que proporciona información completa sobre múltiples personajes del universo de cómics. Los usuarios pueden explorar una extensa lista de superhéroes, buscar personajes específicos por nombre y acceder a información detallada de cada uno incluyendo características, poderes, descripción y primera aparición.',
         PROJECT_OBJECTIVES: `
-            <li>Crear una interfaz de usuario intuitiva y responsiva para explorar películas</li>
-            <li>Implementar funcionalidades de búsqueda y filtrado eficientes</li>
-            <li>Integrar APIs externas para obtener datos actualizados de películas</li>
-            <li>Desarrollar un sistema de favoritos con persistencia local</li>
-            <li>Aplicar principios de diseño web moderno y accesibilidad</li>`,
+            <li>Desarrollar una aplicación móvil nativa para Android completamente funcional</li>
+            <li>Aprender desarrollo con Android Studio y programación en Kotlin</li>
+            <li>Implementar consumo eficiente de API REST para datos de superhéroes</li>
+            <li>Crear una interfaz de usuario intuitiva y responsive para móviles</li>
+            <li>Integrar funcionalidad de búsqueda en tiempo real por nombre</li>
+            <li>Mostrar información detallada de cada superhéroe de forma organizada</li>
+            <li>Aplicar principios de UX/UI design específicos para dispositivos Android</li>`,
         PROJECT_FEATURES: `
             <div class="feature-card">
-                <h4>🔍 Búsqueda Avanzada</h4>
-                <p>Sistema de búsqueda en tiempo real con filtros por género, año y calificación.</p>
+                <h4>📋 Lista de Superhéroes</h4>
+                <p>Visualización completa de superhéroes disponibles en la API con información básica y navegación fluida desarrollada en Kotlin.</p>
             </div>
             <div class="feature-card">
-                <h4>📱 Diseño Responsivo</h4>
-                <p>Interfaz adaptable que se ve perfecta en dispositivos móviles, tablets y desktop.</p>
-            </div>
-            <div class="feature-card">
-                <h4>⭐ Sistema de Favoritos</h4>
-                <p>Guarda tus películas favoritas con persistencia en el navegador.</p>
+                <h4>🔍 Búsqueda por Nombre</h4>
+                <p>Barra de búsqueda integrada que permite encontrar superhéroes específicos escribiendo su nombre en tiempo real.</p>
             </div>
             <div class="feature-card">
                 <h4>📊 Información Detallada</h4>
-                <p>Visualiza sinopsis, cast, director, calificaciones y trailers.</p>
+                <p>Vista completa de características, poderes, descripción y primera aparición de cada superhéroe.</p>
+            </div>
+            <div class="feature-card">
+                <h4>📱 Aplicación Android Nativa</h4>
+                <p>Desarrollada específicamente para Android usando Android Studio y Kotlin para máximo rendimiento y compatibilidad.</p>
+            </div>
+            <div class="feature-card">
+                <h4>⚡ Navegación Intuitiva</h4>
+                <p>Interfaz optimizada para dispositivos táctiles con transiciones suaves entre pantallas programadas en Kotlin.</p>
+            </div>
+            <div class="feature-card">
+                <h4>🦸 Base de Datos Extensa</h4>
+                <p>Acceso a información de múltiples superhéroes a través de API especializada y actualizada mediante HTTP requests.</p>
             </div>`,
         DEVELOPMENT_PROCESS: `
             <div class="timeline-item">
-                <h4>Fase 1: Planificación y Diseño</h4>
-                <p>Análisis de requisitos, diseño de wireframes y definición de la arquitectura de la aplicación.</p>
+                <h4>Fase 1: Setup y Configuración</h4>
+                <p>Configuración inicial de Android Studio, setup del proyecto Kotlin y selección de API de superhéroes.</p>
             </div>
             <div class="timeline-item">
-                <h4>Fase 2: Estructura HTML</h4>
-                <p>Creación de la estructura semántica HTML y definición de componentes principales.</p>
+                <h4>Fase 2: Diseño de UI</h4>
+                <p>Creación de layouts en XML, diseño de la lista principal y pantalla de detalles siguiendo Material Design.</p>
             </div>
             <div class="timeline-item">
-                <h4>Fase 3: Estilos CSS</h4>
-                <p>Implementación del diseño responsivo y efectos visuales modernos.</p>
+                <h4>Fase 3: Integración API</h4>
+                <p>Implementación de llamadas HTTP en Kotlin, parsing de JSON y manejo de datos asíncronos.</p>
             </div>
             <div class="timeline-item">
-                <h4>Fase 4: Funcionalidad JavaScript</h4>
-                <p>Desarrollo de la lógica de negocio e integración con API externa.</p>
+                <h4>Fase 4: Funcionalidades</h4>
+                <p>Desarrollo de búsqueda, navegación entre Activities y optimización de rendimiento final.</p>
             </div>`,
         SCREENSHOTS: `
             <div class="screenshot-item">
-                <img src="../assets/screenshots/peliculas-home.jpg" alt="Página principal" />
+                <img src="../assets/img/superhero/Pantalla-Inicio.png" alt="Pantalla de inicio de la app" />
+                <p class="screenshot-caption">Pantalla de Inicio - Vista principal de la aplicación SuperHero</p>
             </div>
             <div class="screenshot-item">
-                <img src="../assets/screenshots/peliculas-search.jpg" alt="Búsqueda de películas" />
+                <img src="../assets/img/superhero/Pantalla-Busqueda.png" alt="Funcionalidad de búsqueda" />
+                <p class="screenshot-caption">Pantalla de Búsqueda - Funcionalidad para buscar superhéroes por nombre</p>
             </div>
             <div class="screenshot-item">
-                <img src="../assets/screenshots/peliculas-detail.jpg" alt="Detalle de película" />
+                <img src="../assets/img/superhero/Pantalla-Imagen-Hero.png" alt="Imagen del superhéroe seleccionado" />
+                <p class="screenshot-caption">Vista de Imagen - Visualización de la imagen del superhéroe</p>
+            </div>
+            <div class="screenshot-item">
+                <img src="../assets/img/superhero/Pantalla-Skills.png" alt="Habilidades del superhéroe" />
+                <p class="screenshot-caption">Pantalla de Habilidades - Estadísticas y poderes del superhéroe</p>
+            </div>
+            <div class="screenshot-item">
+                <img src="../assets/img/superhero/Pantalla-Characters.png" alt="Características del superhéroe" />
+                <p class="screenshot-caption">Pantalla de Características - Información detallada y primera aparición</p>
             </div>`,
         CHALLENGES: `
-            <li>Manejo de respuestas asíncronas de la API</li>
-            <li>Optimización para diferentes tamaños de pantalla</li>
-            <li>Gestión eficiente del estado de la aplicación</li>
-            <li>Implementación de búsqueda en tiempo real sin afectar rendimiento</li>`,
+            <li>Manejo eficiente de llamadas HTTP asíncronas en Kotlin</li>
+            <li>Parseo correcto de respuestas JSON complejas de la API de superhéroes</li>
+            <li>Optimización de rendimiento en la lista de superhéroes con RecyclerView</li>
+            <li>Implementación de búsqueda en tiempo real sin afectar performance</li>
+            <li>Gestión del ciclo de vida de Activities en Android</li>
+            <li>Adaptación de la UI para diferentes tamaños de pantalla Android</li>
+            <li>Debugging y manejo de errores en llamadas de red</li>`,
         LEARNINGS: `
-            <li>Manejo avanzado de APIs REST con JavaScript</li>
-            <li>Técnicas de optimización de rendimiento web</li>
-            <li>Implementación de almacenamiento local</li>
-            <li>Principios de diseño responsivo y accesibilidad</li>`,
+            <li>Desarrollo nativo Android con Kotlin y Android Studio desde cero</li>
+            <li>Consumo de APIs REST y manejo de respuestas asíncronas en Kotlin</li>
+            <li>Diseño de interfaces móviles con XML layouts y Material Design</li>
+            <li>Implementación de RecyclerView para listas eficientes y scrolling fluido</li>
+            <li>Navegación entre Activities y paso de datos entre pantallas</li>
+            <li>Principios de Material Design para aplicaciones Android</li>
+            <li>Debugging, testing y deployment en dispositivos Android reales</li>
+            <li>Programación orientada a objetos aplicada en desarrollo móvil</li>`,
         OTHER_PROJECTS: `
             <a href="SIGE.html" class="other-project-card">
                 <div class="other-project-image">📊</div>
@@ -118,22 +150,22 @@ const projects = {
                     <p>Sistema de gestión empresarial con dashboard interactivo.</p>
                 </div>
             </a>
-            <a href="SuperHero.html" class="other-project-card">
-                <div class="other-project-image">🦸</div>
-                <div class="other-project-content">
-                    <h3>SuperHero App</h3>
-                    <p>Aplicación para explorar información de superhéroes.</p>
-                </div>
-            </a>
             <a href="Velarys.html" class="other-project-card">
                 <div class="other-project-image">🌐</div>
                 <div class="other-project-content">
                     <h3>Velarys</h3>
                     <p>Plataforma de aprendizaje de idiomas con Angular.</p>
                 </div>
+            </a>
+            <a href="Peliculas.html" class="other-project-card">
+                <div class="other-project-image">🎬</div>
+                <div class="other-project-content">
+                    <h3>Sistema de Películas</h3>
+                    <p>Plataforma para explorar información de películas.</p>
+                </div>
             </a>`
     },
-    
+        
     'SIGE': {
         PROJECT_NAME: 'Sistema SIGE',
         PROJECT_TITLE: 'Sistema de Información y Gestión Empresarial',
@@ -258,7 +290,7 @@ const projects = {
             </a>`
     },
     
-    'SuperHero': {
+    'Peliculas': {
         PROJECT_NAME: 'SuperHero App',
         PROJECT_TITLE: 'Aplicación de Superhéroes',
         PROJECT_SUBTITLE: 'Plataforma interactiva para explorar el universo de superhéroes con información detallada, estadísticas y búsqueda avanzada',

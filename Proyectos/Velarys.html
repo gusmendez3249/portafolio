@@ -318,6 +318,12 @@
     <script>
         // Script específico para animaciones de proyecto
         document.addEventListener('DOMContentLoaded', function() {
+            // Crear el lightbox HTML
+            createLightbox();
+            
+            // Inicializar lightbox para todas las imágenes
+            initializeLightbox();
+            
             // Animaciones para elementos de la página
             const cards = document.querySelectorAll('.feature-card, .tech-item, .timeline-item');
             cards.forEach((card, index) => {
@@ -339,6 +345,76 @@
                 });
             });
         });
+
+        // Función para crear el lightbox HTML
+        function createLightbox() {
+            const lightboxHTML = `
+                <div class="lightbox" id="lightbox">
+                    <div class="lightbox-content">
+                        <button class="lightbox-close" id="lightbox-close">&times;</button>
+                        <img class="lightbox-img" id="lightbox-img" src="" alt="">
+                        <div class="lightbox-caption" id="lightbox-caption"></div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+        }
+
+        // Función para inicializar el lightbox
+        function initializeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxClose = document.getElementById('lightbox-close');
+            
+            // Seleccionar todas las imágenes de screenshots
+            const images = document.querySelectorAll('.screenshot-item img, .project-screenshot');
+            
+            images.forEach(img => {
+                img.addEventListener('click', function() {
+                    openLightbox(this.src, this.alt);
+                });
+            });
+            
+            // Cerrar lightbox
+            lightboxClose.addEventListener('click', closeLightbox);
+            
+            // Cerrar lightbox al hacer clic en el fondo
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            // Cerrar lightbox con tecla Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+            
+            // Funciones del lightbox
+            function openLightbox(src, caption) {
+                lightboxImg.src = src;
+                lightboxCaption.textContent = caption || '';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Evitar scroll del body
+            }
+            
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = ''; // Restaurar scroll del body
+                
+                // Esperar a que termine la transición antes de limpiar
+                setTimeout(() => {
+                    if (!lightbox.classList.contains('active')) {
+                        lightboxImg.src = '';
+                        lightboxCaption.textContent = '';
+                    }
+                }, 300);
+            }
+        }
     </script>
 </body>
 </html>
