@@ -3,6 +3,32 @@ const header = document.getElementById('header');
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
 
+// Theme Toggle Functionality
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle?.querySelector('.theme-icon');
+const body = document.body;
+
+// Initialize theme
+if (themeToggle && themeIcon) {
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    body.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+        themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+}
+
 // Header scroll effect
 let lastScrollY = window.scrollY;
 
@@ -14,6 +40,38 @@ window.addEventListener('scroll', () => {
     }
     
     lastScrollY = window.scrollY;
+});
+
+// Mobile menu functionality
+if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    navLinks.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            mobileMenuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (header && !header.contains(e.target)) {
+        navLinks?.classList.remove('active');
+        mobileMenuBtn?.classList.remove('active');
+    }
+});
+
+// Close mobile menu on window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        navLinks?.classList.remove('active');
+        mobileMenuBtn?.classList.remove('active');
+    }
 });
 
 // Intersection Observer for animations
@@ -89,73 +147,6 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Specific handling for project pages demo buttons
-document.addEventListener('DOMContentLoaded', function() {
-    // Handle "Ver Imágenes" / "Ver Demo" buttons in project pages
-    document.querySelectorAll('.btn-primary').forEach(button => {
-        const href = button.getAttribute('href');
-        if (href && href.startsWith('#')) {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const target = document.querySelector(href);
-                if (target) {
-                    const headerHeight = 120; // Extra space for project pages
-                    const targetPosition = target.offsetTop - headerHeight;
-                    
-                    window.scrollTo({
-                        top: Math.max(0, targetPosition),
-                        behavior: 'smooth'
-                    });
-                    
-                    // Visual feedback
-                    target.style.transition = 'background-color 0.3s ease';
-                    target.style.backgroundColor = 'rgba(79, 70, 229, 0.05)';
-                    setTimeout(() => {
-                        target.style.backgroundColor = '';
-                    }, 1000);
-                } else {
-                    console.log('Screenshots section not found');
-                }
-            });
-        }
-    });
-    
-    // Verify screenshots section exists on project pages
-    if (window.location.pathname.includes('/Proyectos/')) {
-        const screenshotsSection = document.getElementById('screenshots');
-        if (screenshotsSection) {
-            console.log('✅ Screenshots section found');
-        } else {
-            console.log('❌ Screenshots section not found - check template');
-        }
-    }
-});
-
-// Mobile menu functionality
-if (mobileMenuBtn && navLinks) {
-    mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        mobileMenuBtn.classList.toggle('active');
-    });
-}
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (header && !header.contains(e.target)) {
-        navLinks?.classList.remove('active');
-        mobileMenuBtn?.classList.remove('active');
-    }
-});
-
-// Close mobile menu on window resize
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        navLinks?.classList.remove('active');
-        mobileMenuBtn?.classList.remove('active');
-    }
-});
-
 // Card hover effects with mouse tracking
 const cards = document.querySelectorAll('.skill-card, .project-card, .detail-card');
 
@@ -208,21 +199,6 @@ contactItems.forEach(item => {
     });
 });
 
-// Typing effect for the main title (optional enhancement)
-const typeWriter = (element, text, speed = 50) => {
-    let i = 0;
-    element.innerHTML = '';
-    
-    const timer = setInterval(() => {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-        } else {
-            clearInterval(timer);
-        }
-    }, speed);
-};
-
 // Active navigation link highlighting
 const highlightActiveSection = () => {
     const sections = document.querySelectorAll('section[id]');
@@ -274,15 +250,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize any additional features
     console.log('Portfolio loaded successfully! 🚀');
     
-    // Additional smooth scroll setup for project pages
-    setTimeout(() => {
-        // Re-scan for any dynamically loaded elements
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            // Remove any existing listeners to avoid duplicates
-            const newLink = link.cloneNode(true);
-            link.parentNode.replaceChild(newLink, link);
-        });
-    }, 500);
+    // Specific handling for project pages demo buttons
+    document.querySelectorAll('.btn-primary').forEach(button => {
+        const href = button.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerHeight = 120; // Extra space for project pages
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: Math.max(0, targetPosition),
+                        behavior: 'smooth'
+                    });
+                    
+                    // Visual feedback
+                    target.style.transition = 'background-color 0.3s ease';
+                    target.style.backgroundColor = 'rgba(79, 70, 229, 0.05)';
+                    setTimeout(() => {
+                        target.style.backgroundColor = '';
+                    }, 1000);
+                } else {
+                    console.log('Screenshots section not found');
+                }
+            });
+        }
+    });
 });
 
 // Performance optimization: Throttle scroll events
@@ -312,55 +308,10 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Add focus management for accessibility
-const focusableElements = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])';
-
-const trapFocus = (element) => {
-    const focusableContent = element.querySelectorAll(focusableElements);
-    const firstFocusableElement = focusableContent[0];
-    const lastFocusableElement = focusableContent[focusableContent.length - 1];
-    
-    const handleTabKey = (e) => {
-        if (e.key === 'Tab') {
-            if (e.shiftKey) {
-                if (document.activeElement === firstFocusableElement) {
-                    lastFocusableElement.focus();
-                    e.preventDefault();
-                }
-            } else {
-                if (document.activeElement === lastFocusableElement) {
-                    firstFocusableElement.focus();
-                    e.preventDefault();
-                }
-            }
-        }
-    };
-    
-    document.addEventListener('keydown', handleTabKey);
-    
-    // Return cleanup function
-    return () => {
-        document.removeEventListener('keydown', handleTabKey);
-    };
-};
-
 // Error handling
 window.addEventListener('error', (e) => {
     console.error('An error occurred:', e.error);
 });
-
-// Service Worker registration (for PWA capabilities)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
-    });
-}
 
 // Debug function for troubleshooting scroll issues
 window.debugScroll = function(targetId) {

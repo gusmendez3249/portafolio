@@ -10,20 +10,20 @@
     --success-color: #059669;
     --warning-color: #d97706;
     
-    /* Colores de texto suaves */
+    /* Colores de texto suaves - Tema Claro */
     --text-primary: #1e293b;
     --text-secondary: #475569;
     --text-light: #64748b;
     --text-muted: #94a3b8;
     
-    /* Fondos suaves y confortables */
+    /* Fondos suaves y confortables - Tema Claro */
     --background-primary: #f8fafc;
     --background-secondary: #f1f5f9;
     --background-tertiary: #e2e8f0;
     --background-card: #ffffff;
     --background-soft: #fefefe;
     
-    /* Bordes suaves */
+    /* Bordes suaves - Tema Claro */
     --border-color: #e2e8f0;
     --border-light: #f1f5f9;
     
@@ -47,6 +47,36 @@
     --border-radius-2xl: 1.5rem;
 }
 
+/* Variables para Tema Oscuro */
+[data-theme="dark"] {
+    /* Colores de texto - Tema Oscuro */
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-light: #94a3b8;
+    --text-muted: #64748b;
+    
+    /* Fondos - Tema Oscuro */
+    --background-primary: #0f172a;
+    --background-secondary: #1e293b;
+    --background-tertiary: #334155;
+    --background-card: #1e293b;
+    --background-soft: #0f172a;
+    
+    /* Bordes - Tema Oscuro */
+    --border-color: #334155;
+    --border-light: #475569;
+    
+    /* Sombras más suaves para tema oscuro */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    
+    /* Gradientes para tema oscuro */
+    --gradient-soft: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
 /* Reset y configuración base */
 * {
     margin: 0;
@@ -61,6 +91,7 @@ body {
     background-color: var(--background-primary);
     font-weight: 400;
     scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -143,6 +174,43 @@ nav {
 
 .nav-links a:hover::after {
     width: 100%;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--background-card);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    margin-left: 1rem;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:hover .theme-icon {
+    transform: scale(1.1);
+}
+
+.theme-icon {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    filter: grayscale(0);
+}
+
+.theme-toggle:hover .theme-icon {
+    filter: brightness(0) invert(1);
 }
 
 .mobile-menu-btn {
@@ -731,6 +799,17 @@ footer p {
         display: flex;
     }
 
+    /* Ajustar posición del toggle en móvil */
+    .theme-toggle {
+        width: 42px;
+        height: 42px;
+        margin-left: 0.5rem;
+    }
+
+    .theme-icon {
+        font-size: 1.1rem;
+    }
+
     .about-section {
         padding: 6rem 0 3rem;
     }
@@ -945,4 +1024,32 @@ a:focus,
 
 .profile-img.with-border .profile-photo {
     border: none;
+}
+
+/* Transiciones suaves para cambio de tema */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ajustes específicos para tema oscuro */
+[data-theme="dark"] {
+    /* Header transparente oscuro */
+    header {
+        background: rgba(15, 23, 42, 0.95);
+    }
+    
+    header.scrolled {
+        background: rgba(15, 23, 42, 0.98);
+    }
+    
+    /* Tech tags en tema oscuro */
+    .tech-tag {
+        background: var(--background-tertiary);
+        color: var(--text-light);
+    }
+    
+    /* Ajustes para mejor contraste */
+    .mobile-menu-btn span {
+        background: var(--text-primary);
+    }
 }

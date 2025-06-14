@@ -3,10 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gustavo Méndez</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Gustavo Méndez - Desarrollador Junior</title>
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Gustavo Ángel Cruz Méndez - Estudiante de Desarrollo de Software, especializado en desarrollo web full-stack y aplicaciones móviles.">
+    <meta name="keywords" content="desarrollador, programador, web developer, javascript, react, angular, portafolio">
+    <meta name="author" content="Gustavo Ángel Cruz Méndez">
+    
+    <!-- Open Graph Meta Tags (para redes sociales) -->
+    <meta property="og:title" content="Gustavo Méndez - Desarrollador Junior">
+    <meta property="og:description" content="Portafolio de desarrollador junior especializado en desarrollo web y aplicaciones móviles">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tu-dominio.com">
+    <meta property="og:image" content="assets/img/perfil/yo.jpg">
+    
+    <!-- Favicon - Opción 1: Emoji como favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    
+    <!-- Theme color para móviles -->
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="msapplication-TileColor" content="#4f46e5">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header id="header">
@@ -23,6 +45,11 @@
                 <li><a href="#proyectos">Proyectos</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
+            
+            <!-- Toggle de tema -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+                <span class="theme-icon">🌙</span>
+            </button>
         </nav>
     </header>
 
@@ -44,7 +71,9 @@
                 <div class="intro-visual">
                     <div class="profile-card">
                         <div class="profile-img">
+                            <!-- OPCIÓN 1: Con foto real -->
                             <img src="assets/img/perfil/yo.jpg" alt="Gustavo Ángel Cruz Méndez" class="profile-photo">
+                            
                         </div>
                         <div class="profile-info">
                             <h3>Gustavo Ángel Cruz Méndez</h3>
@@ -116,8 +145,6 @@
         </div>
     </section>
 
-   <!-- Reemplaza los enlaces en la sección de proyectos de tu index.html -->
-
     <section id="proyectos">
         <div class="container">
             <h2 class="section-title">Proyectos Académicos y Personales</h2>
@@ -132,7 +159,6 @@
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">API REST</span>
                         </div>
-                        <!-- ENLACE ACTUALIZADO -->
                         <a href="Proyectos/Peliculas.html" class="project-link">Ver Detalles</a>
                     </div>
                 </div>
@@ -147,7 +173,6 @@
                             <span class="tech-tag">MySQL</span>
                             <span class="tech-tag">Bootstrap</span>
                         </div>
-                        <!-- ENLACE ACTUALIZADO -->
                         <a href="Proyectos/SIGE.html" class="project-link">Ver Detalles</a>
                     </div>
                 </div>
@@ -162,7 +187,6 @@
                             <span class="tech-tag">API REST</span>
                             <span class="tech-tag">CSS3</span>
                         </div>
-                        <!-- ENLACE ACTUALIZADO -->
                         <a href="Proyectos/SuperHero.html" class="project-link">Ver Detalles</a>
                     </div>
                 </div>
@@ -178,7 +202,6 @@
                             <span class="tech-tag">Node.js</span>
                             <span class="tech-tag">MySQL</span>
                         </div>
-                        <!-- ENLACE ACTUALIZADO -->
                         <a href="Proyectos/Velarys.html" class="project-link">Ver Detalles</a>
                     </div>
                 </div>
