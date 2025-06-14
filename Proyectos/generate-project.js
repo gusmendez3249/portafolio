@@ -20,7 +20,7 @@ const projects = {
         PROJECT_STATUS: 'Completado',
         PROJECT_STATUS_CLASS: 'completed',
         PROJECT_TEAM: 'Individual',
-        DEMO_LINK: '#',
+        DEMO_LINK: '#screenshots',
         GITHUB_LINK: '#',
         TECH_BADGES: `
             <span class="tech-badge">HTML5</span>
@@ -125,11 +125,11 @@ const projects = {
                     <p>Aplicación para explorar información de superhéroes.</p>
                 </div>
             </a>
-            <a href="Vuejs.html" class="other-project-card">
-                <div class="other-project-image">💚</div>
+            <a href="Velarys.html" class="other-project-card">
+                <div class="other-project-image">🌐</div>
                 <div class="other-project-content">
-                    <h3>Proyecto Vue.js</h3>
-                    <p>Aplicación SPA moderna desarrollada con Vue.js.</p>
+                    <h3>Velarys</h3>
+                    <p>Plataforma de aprendizaje de idiomas con Angular.</p>
                 </div>
             </a>`
     },
@@ -144,7 +144,7 @@ const projects = {
         PROJECT_STATUS: 'Completado',
         PROJECT_STATUS_CLASS: 'completed',
         PROJECT_TEAM: 'Equipo de 3',
-        DEMO_LINK: '#',
+        DEMO_LINK: '#screenshots',
         GITHUB_LINK: '#',
         TECH_BADGES: `
             <span class="tech-badge">PHP</span>
@@ -249,11 +249,11 @@ const projects = {
                     <p>Aplicación para explorar información de superhéroes.</p>
                 </div>
             </a>
-            <a href="Vuejs.html" class="other-project-card">
-                <div class="other-project-image">💚</div>
+            <a href="Velarys.html" class="other-project-card">
+                <div class="other-project-image">🌐</div>
                 <div class="other-project-content">
-                    <h3>Proyecto Vue.js</h3>
-                    <p>Aplicación SPA moderna desarrollada con Vue.js.</p>
+                    <h3>Velarys</h3>
+                    <p>Plataforma de aprendizaje de idiomas con Angular.</p>
                 </div>
             </a>`
     },
@@ -268,7 +268,7 @@ const projects = {
         PROJECT_STATUS: 'En progreso',
         PROJECT_STATUS_CLASS: 'in-progress',
         PROJECT_TEAM: 'Individual',
-        DEMO_LINK: '#',
+        DEMO_LINK: '#screenshots',
         GITHUB_LINK: '#',
         TECH_BADGES: `
             <span class="tech-badge">React</span>
@@ -366,11 +366,11 @@ const projects = {
                     <p>Sistema de gestión empresarial con dashboard.</p>
                 </div>
             </a>
-            <a href="Vuejs.html" class="other-project-card">
-                <div class="other-project-image">💚</div>
+            <a href="Velarys.html" class="other-project-card">
+                <div class="other-project-image">🌐</div>
                 <div class="other-project-content">
-                    <h3>Proyecto Vue.js</h3>
-                    <p>Aplicación SPA moderna con Vue.js.</p>
+                    <h3>Velarys</h3>
+                    <p>Plataforma de aprendizaje de idiomas con Angular.</p>
                 </div>
             </a>
             <a href="Peliculas.html" class="other-project-card">
@@ -382,9 +382,6 @@ const projects = {
             </a>`
     },
     
-// Configuración actualizada para el proyecto Velarys
-// Reemplaza la sección 'Vuejs' en tu Proyectos/generate-project.js
-
     'Velarys': {
         PROJECT_NAME: 'Velarys',
         PROJECT_TITLE: 'Velarys - Plataforma de Aprendizaje de Idiomas',
@@ -395,7 +392,7 @@ const projects = {
         PROJECT_STATUS: 'Completado',
         PROJECT_STATUS_CLASS: 'completed',
         PROJECT_TEAM: 'Equipo de 4 - Metodología Scrum',
-        DEMO_LINK: '#SCREENSHOTS',
+        DEMO_LINK: '#screenshots',
         GITHUB_LINK: 'https://github.com/gusmendez3249/Velarys-Final.git',
         TECH_BADGES: `
             <span class="tech-badge">Angular</span>
@@ -439,7 +436,6 @@ const projects = {
             <li>Aplicar metodología Scrum en un proyecto real con cliente</li>
             <li>Diseñar experiencia de usuario intuitiva y engaging</li>
             <li>Integrar base de datos relacional para gestión de usuarios y progreso</li>`,
-
         PROJECT_FEATURES: `
             <div class="feature-card">
                 <h4>👥 Sistema de Roles</h4>
@@ -455,7 +451,7 @@ const projects = {
             </div>
             <div class="feature-card">
                 <h4>📊 Seguimiento Básico</h4>
-                <p>Vista simple del progreso del estudiante con sus lecciones.</p>
+                <p>Vista simple del progreso del estudiante con estadísticas de lecciones completadas.</p>
             </div>
             <div class="feature-card">
                 <h4>📱 Diseño Responsive</h4>
@@ -610,11 +606,16 @@ function main() {
             console.log(`   - ${projectKey}.html`);
         });
         
-        console.log('\n🔗 No olvides actualizar los enlaces en index.html:');
+        console.log('\n🔗 Enlaces actualizados para index.html:');
         console.log('   <a href="Proyectos/Peliculas.html" class="project-link">Ver Proyecto</a>');
         console.log('   <a href="Proyectos/SIGE.html" class="project-link">Ver Proyecto</a>');
         console.log('   <a href="Proyectos/SuperHero.html" class="project-link">Ver Proyecto</a>');
-        console.log('   <a href="Proyectos/Vuejs.html" class="project-link">Ver Proyecto</a>');
+        console.log('   <a href="Proyectos/Velarys.html" class="project-link">Ver Proyecto</a>');
+        
+        console.log('\n🎯 Demo Links configurados:');
+        console.log('   • Todos los botones "Ver Demo" redirigen a #screenshots');
+        console.log('   • El botón "Ver Código" de Velarys redirige a GitHub');
+        console.log('   • Los demás "Ver Código" están como placeholder (#)');
     }
 }
 

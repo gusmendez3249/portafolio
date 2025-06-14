@@ -8,9 +8,9 @@ let lastScrollY = window.scrollY;
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-        header.classList.add('scrolled');
+        header?.classList.add('scrolled');
     } else {
-        header.classList.remove('scrolled');
+        header?.classList.remove('scrolled');
     }
     
     lastScrollY = window.scrollY;
@@ -46,47 +46,113 @@ document.querySelectorAll('section:not(.about-section)').forEach(section => {
     observer.observe(section);
 });
 
-// Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+// SMOOTH SCROLL MEJORADO - Funciona para todas las páginas
+function handleSmoothScroll(anchor, targetSelector) {
+    const target = document.querySelector(targetSelector);
+    
+    if (target) {
+        // Close mobile menu if open
+        navLinks?.classList.remove('active');
+        mobileMenuBtn?.classList.remove('active');
         
-        if (target) {
-            // Close mobile menu if open
-            navLinks.classList.remove('active');
-            
-            // Smooth scroll to target
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+        // Calculate offset for fixed header
+        const headerHeight = header ? header.offsetHeight + 20 : 100;
+        const targetPosition = target.offsetTop - headerHeight;
+        
+        window.scrollTo({
+            top: Math.max(0, targetPosition),
+            behavior: 'smooth'
+        });
+        
+        // Update URL without triggering scroll (only for hash links)
+        if (targetSelector.startsWith('#') && window.history) {
+            history.pushState(null, null, targetSelector);
+        }
+        
+        return true;
+    }
+    return false;
+}
+
+// Smooth scroll for navigation links
+document.addEventListener('click', function(e) {
+    // Check if clicked element is a link with href starting with #
+    const link = e.target.closest('a[href^="#"]');
+    if (link) {
+        e.preventDefault();
+        const targetSelector = link.getAttribute('href');
+        
+        // Try to scroll to target
+        if (!handleSmoothScroll(link, targetSelector)) {
+            console.log('Target not found:', targetSelector);
+        }
+    }
+});
+
+// Specific handling for project pages demo buttons
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle "Ver Imágenes" / "Ver Demo" buttons in project pages
+    document.querySelectorAll('.btn-primary').forEach(button => {
+        const href = button.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerHeight = 120; // Extra space for project pages
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: Math.max(0, targetPosition),
+                        behavior: 'smooth'
+                    });
+                    
+                    // Visual feedback
+                    target.style.transition = 'background-color 0.3s ease';
+                    target.style.backgroundColor = 'rgba(79, 70, 229, 0.05)';
+                    setTimeout(() => {
+                        target.style.backgroundColor = '';
+                    }, 1000);
+                } else {
+                    console.log('Screenshots section not found');
+                }
             });
-            
-            // Update URL without triggering scroll
-            history.pushState(null, null, this.getAttribute('href'));
         }
     });
+    
+    // Verify screenshots section exists on project pages
+    if (window.location.pathname.includes('/Proyectos/')) {
+        const screenshotsSection = document.getElementById('screenshots');
+        if (screenshotsSection) {
+            console.log('✅ Screenshots section found');
+        } else {
+            console.log('❌ Screenshots section not found - check template');
+        }
+    }
 });
 
 // Mobile menu functionality
-mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    mobileMenuBtn.classList.toggle('active');
-});
+if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+    });
+}
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!header.contains(e.target)) {
-        navLinks.classList.remove('active');
-        mobileMenuBtn.classList.remove('active');
+    if (header && !header.contains(e.target)) {
+        navLinks?.classList.remove('active');
+        mobileMenuBtn?.classList.remove('active');
     }
 });
 
 // Close mobile menu on window resize
 window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
-        navLinks.classList.remove('active');
-        mobileMenuBtn.classList.remove('active');
+        navLinks?.classList.remove('active');
+        mobileMenuBtn?.classList.remove('active');
     }
 });
 
@@ -160,7 +226,7 @@ const typeWriter = (element, text, speed = 50) => {
 // Active navigation link highlighting
 const highlightActiveSection = () => {
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const navLinksElements = document.querySelectorAll('.nav-links a');
     
     let current = '';
     
@@ -168,12 +234,12 @@ const highlightActiveSection = () => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
         
-        if (scrollY >= (sectionTop - 100)) {
+        if (window.scrollY >= (sectionTop - 100)) {
             current = section.getAttribute('id');
         }
     });
     
-    navLinks.forEach(link => {
+    navLinksElements.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
@@ -207,6 +273,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize any additional features
     console.log('Portfolio loaded successfully! 🚀');
+    
+    // Additional smooth scroll setup for project pages
+    setTimeout(() => {
+        // Re-scan for any dynamically loaded elements
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            // Remove any existing listeners to avoid duplicates
+            const newLink = link.cloneNode(true);
+            link.parentNode.replaceChild(newLink, link);
+        });
+    }, 500);
 });
 
 // Performance optimization: Throttle scroll events
@@ -231,21 +307,20 @@ window.addEventListener('scroll', throttle(() => {
 // Keyboard navigation support
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        navLinks.classList.remove('active');
-        mobileMenuBtn.classList.remove('active');
+        navLinks?.classList.remove('active');
+        mobileMenuBtn?.classList.remove('active');
     }
 });
 
 // Add focus management for accessibility
 const focusableElements = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])';
-const modal = document.querySelector('.nav-links');
 
 const trapFocus = (element) => {
     const focusableContent = element.querySelectorAll(focusableElements);
     const firstFocusableElement = focusableContent[0];
     const lastFocusableElement = focusableContent[focusableContent.length - 1];
     
-    document.addEventListener('keydown', (e) => {
+    const handleTabKey = (e) => {
         if (e.key === 'Tab') {
             if (e.shiftKey) {
                 if (document.activeElement === firstFocusableElement) {
@@ -259,7 +334,14 @@ const trapFocus = (element) => {
                 }
             }
         }
-    });
+    };
+    
+    document.addEventListener('keydown', handleTabKey);
+    
+    // Return cleanup function
+    return () => {
+        document.removeEventListener('keydown', handleTabKey);
+    };
 };
 
 // Error handling
@@ -279,3 +361,28 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// Debug function for troubleshooting scroll issues
+window.debugScroll = function(targetId) {
+    const target = document.querySelector(targetId);
+    console.log('Target:', target);
+    console.log('Target offset:', target ? target.offsetTop : 'Not found');
+    console.log('Header height:', header ? header.offsetHeight : 'Header not found');
+    console.log('Current scroll:', window.scrollY);
+};
+
+// Utility function to manually scroll to screenshots (for debugging)
+window.scrollToScreenshots = function() {
+    const target = document.getElementById('screenshots');
+    if (target) {
+        const headerHeight = 120;
+        const targetPosition = target.offsetTop - headerHeight;
+        window.scrollTo({
+            top: Math.max(0, targetPosition),
+            behavior: 'smooth'
+        });
+        console.log('Scrolled to screenshots');
+    } else {
+        console.log('Screenshots section not found');
+    }
+};
